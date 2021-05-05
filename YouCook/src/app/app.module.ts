@@ -9,11 +9,12 @@ import { AppComponent } from './app.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { HttpClientModule } from '@angular/common/http';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAyhIJl4xttQMyfYwytf0EW4xt3q2N9isM",
   authDomain: "youcook-c3088.firebaseapp.com",
-  databaseURL: "https://youcook-c3088-default-rtdb.firebaseio.com",
+  databaseURL: "https://youcook-c3088-default-rtdb.firebaseio.com/",
   projectId: "youcook-c3088",
   storageBucket: "youcook-c3088.appspot.com",
   messagingSenderId: "678417005657",
@@ -25,11 +26,14 @@ export const firebaseConfig = {
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent],
-})
+    HttpClientModule],
+    providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+    bootstrap: [AppComponent],
+  })
+
 
 
 
 export class AppModule {}
+
+
