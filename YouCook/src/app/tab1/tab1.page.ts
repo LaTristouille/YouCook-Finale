@@ -1,3 +1,4 @@
+import { ConditionalExpr } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 
@@ -12,11 +13,14 @@ export class Tab1Page {
   recettes = [];
 
   constructor(public afDB: AngularFireDatabase) {
+
     this.getRecettes();
 
   }
   addRecetteToFirebase(){
-    console.log('myRecette:' + this.myRecette)
+    this.recettes.length = 0;
+
+    console.log(this.recettes)
     this.afDB.list('Recettes/').push({
       ingredient: 'je suis un ingredient',
       detailRecette: this.myRecette,
@@ -34,7 +38,7 @@ this.myRecette = '';
   getRecettes() {
     this.afDB.list('Recettes/').snapshotChanges(['child_added', 'child_removed']).subscribe(actions => {
       actions.forEach(action =>{
-        console.log(action.payload.exportVal().detailRecette);
+       // console.log(action.payload.exportVal().detailRecette);
         this.recettes.push({
           key: action.key,
           detailRecette: action.payload.exportVal().detailRecette, 
