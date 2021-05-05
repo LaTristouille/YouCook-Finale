@@ -50,4 +50,9 @@ this.myRecette = '';
     })
   }
 
+  deleteRecette(recette: any) {
+    this.recettes.length = 0;
+    this.afDB.list('Recettes/').remove(recette.key);
+  }
+
 }
