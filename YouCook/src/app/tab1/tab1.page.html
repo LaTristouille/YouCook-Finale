@@ -7,11 +7,44 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+ 
+  <ion-card *ngFor="let recette of recettes">
+    <ion-item>
+      <ion-label> 
+        <h2>{{recette.nom}} </h2>
+        <p>{{recette.ingredient}} </p>
+        <p>{{recette.nutriscore}} </p>
+        <p>{{recette.detailRecette}} </p>
+      </ion-label>
+    </ion-item>
+    
+    </ion-card>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-card   *ngIf="addRecette">
+    <ion-item lines="none">
+    <ion-input [(ngModel)]="myRecette" placeholder="Entrer une recette"> </ion-input>
+    <ion-button slot="end" shape="round" (click)="addRecetteToFirebase()"> 
+      <ion-icon name="add" slot="icon-only"> 
+
+      </ion-icon>
+    </ion-button>
+    
+    </ion-item>
+    
+    </ion-card>
+
+ 
+<ion-button *ngIf="!addRecette" (click)="showForm()" expand="block" class="add-button">
+<ion-icon name="add" slot="start"> </ion-icon>
+Ajouter une recette
+</ion-button>
+
+<ion-button *ngIf="addRecette" (click)="showForm()" expand="block" class="add-button">
+  <ion-icon name="close" slot="start"> </ion-icon>
+Annuler  
+  </ion-button>
+
+
+
+
 </ion-content>
