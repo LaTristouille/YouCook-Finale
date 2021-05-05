@@ -9,6 +9,10 @@ import { AngularFireDatabase } from '@angular/fire/database';
 })
 export class Tab1Page {
   myRecette: string;
+  myIngredient: string;
+  myNom: string;
+  myNutriscore: string;
+
   addRecette: boolean;
   recettes = [];
 
@@ -22,10 +26,10 @@ export class Tab1Page {
 
     console.log(this.recettes)
     this.afDB.list('Recettes/').push({
-      ingredient: 'je suis un ingredient',
+      ingredient: this.myIngredient,
       detailRecette: this.myRecette,
-      nutriscore: 'A',
-      nom: 'Patatas bravas',
+      nutriscore: this.myNutriscore,
+      nom: this.myNom,
     });
     this.showForm();
   }

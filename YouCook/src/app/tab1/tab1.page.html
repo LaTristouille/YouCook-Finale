@@ -28,6 +28,9 @@
   <ion-card   *ngIf="addRecette">
     <ion-item lines="none">
     <ion-input [(ngModel)]="myRecette" placeholder="Entrer une recette"> </ion-input>
+    <ion-input [(ngModel)]="myIngredient" placeholder="Entrer une ingredient"> </ion-input>
+    <ion-input [(ngModel)]="myNom" placeholder="Entrer une nom"> </ion-input>
+    <ion-input [(ngModel)]="myNutriscore" placeholder="Entrer une nutriscore"> </ion-input>
     <ion-button slot="end" shape="round" (click)="addRecetteToFirebase()"> 
       <ion-icon name="add" slot="icon-only"> 
 
