@@ -2,6 +2,7 @@ import { ConditionalExpr } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { DataProduct } from '../interfaces/data-product';
+import {NavigationExtras, Router} from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class Tab1Page {
   addRecipe: boolean;
   recipes = [];
 
-  constructor(public afDB: AngularFireDatabase) {
+  constructor(public afDB: AngularFireDatabase, private router: Router) {
 
     this.getRecipes();
 
@@ -60,9 +61,16 @@ this.myNutriscore ='';
     })
   }
 
-  deleteRecipes(recipes: any) {
+  deleteRecipes(recipe: any) {
+    console.log(recipe)
     this.recipes.length = 0;
-    this.afDB.list('Recipes/').remove(recipes.key);
+    this.afDB.list('Recipes/').remove(recipe.key);
   }
+
+  openRecipes(recipe : any)
+{
+ // console.log(recipe)
+  this.router.navigate(['/recipe-detail-page', recipe]);
+}
 
 }
