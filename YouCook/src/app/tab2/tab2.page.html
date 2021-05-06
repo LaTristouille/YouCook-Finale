@@ -13,7 +13,12 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-card class="welcome-card">
+    <img src="/assets/scan.jpeg" alt="" />
+    <ion-button expand='block' margin (click)="goToBarcodeScan()">Scanner un codebare ou un QRcode ici</ion-button>
+  </ion-card>
   <ion-card>
+
     <ion-card-header>
       <ion-card-title>{{ productData.name }}</ion-card-title>
       <ion-card-subtitle>{{productData.codeBar}}</ion-card-subtitle>
