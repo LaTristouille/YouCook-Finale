@@ -7,31 +7,31 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card *ngFor="let recette of recettes">
+  <ion-card *ngFor="let recipe of recipes">
  <ion-item-sliding> 
     <ion-item>
       <ion-label> 
-        <h2>{{recette.nom}} </h2>
-        <p>{{recette.ingredient}} </p>
-        <p>{{recette.nutriscore}} </p>
-        <p>{{recette.detailRecette}} </p>
+        <h2>{{recipe.name}} </h2>
+        <p>{{recipe.ingredient}} </p>
+        <p>{{recipe.nutriscore}} </p>
+        <p>{{recipe.detailRecipe}} </p>
       </ion-label>
     </ion-item>
     <ion-item-options side="end"> 
-      <ion-item-option color="danger" (click)="deleteRecette(recette)">
+      <ion-item-option color="danger" (click)="deleteRecipes(recipes)">
         <ion-icon name="trash-outline" slot="icon-only"></ion-icon> 
     </ion-item-option>
     </ion-item-options>
   </ion-item-sliding>
     </ion-card>
 
-  <ion-card   *ngIf="addRecette">
+  <ion-card   *ngIf="addRecipe">
     <ion-item lines="none">
-    <ion-input [(ngModel)]="myRecette" placeholder="Entrer une recette"> </ion-input>
+    <ion-input [(ngModel)]="myRecipe" placeholder="Entrer une recette"> </ion-input>
     <ion-input [(ngModel)]="myIngredient" placeholder="Entrer un ingredient"> </ion-input>
-    <ion-input [(ngModel)]="myNom" placeholder="Entrer un nom"> </ion-input>
+    <ion-input [(ngModel)]="myName" placeholder="Entrer un nom"> </ion-input>
     <ion-input [(ngModel)]="myNutriscore" placeholder="Entrer un nutriscore"> </ion-input>
-    <ion-button slot="end" shape="round" (click)="addRecetteToFirebase()"> 
+    <ion-button slot="end" shape="round" (click)="addRecipeToFirebase()"> 
       <ion-icon name="add" slot="icon-only"> 
 
       </ion-icon>
@@ -42,12 +42,12 @@
     </ion-card>
 
  
-<ion-button *ngIf="!addRecette" (click)="showForm()" expand="block" class="add-button">
+<ion-button *ngIf="!addRecipes" (click)="showForm()" expand="block" class="add-button">
 <ion-icon name="add" slot="start"> </ion-icon>
 Ajouter une recette
 </ion-button>
 
-<ion-button *ngIf="addRecette" (click)="showForm()" expand="block" class="add-button">
+<ion-button *ngIf="addRecipes" (click)="showForm()" expand="block" class="add-button">
   <ion-icon name="close" slot="start"> </ion-icon>
 Annuler  
   </ion-button>

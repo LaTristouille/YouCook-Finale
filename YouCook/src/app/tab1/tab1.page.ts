@@ -1,62 +1,68 @@
 import { ConditionalExpr } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { DataProduct } from '../interfaces/data-product';
+
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
+
 export class Tab1Page {
-  myRecette: string;
+  myRecipe: string;
   myIngredient: string;
-  myNom: string;
+  myName: string;
   myNutriscore: string;
 
-  addRecette: boolean;
-  recettes = [];
+  addRecipe: boolean;
+  recipes = [];
 
   constructor(public afDB: AngularFireDatabase) {
 
-    this.getRecettes();
+    this.getRecipes();
 
   }
-  addRecetteToFirebase(){
-    this.recettes.length = 0;
+  addRecipeToFirebase(){
+    this.recipes.length = 0;
 
-    console.log(this.recettes)
-    this.afDB.list('Recettes/').push({
+    console.log(this.recipes)
+    this.afDB.list('Recipes/').push({
       ingredient: this.myIngredient,
-      detailRecette: this.myRecette,
+      detailRecipe: this.myRecipe,
       nutriscore: this.myNutriscore,
-      nom: this.myNom,
+      name: this.myName,
     });
     this.showForm();
   }
 
   showForm() {
-this.addRecette = !this.addRecette;
-this.myRecette = '';
+this.addRecipe = !this.addRecipe;
+this.myRecipe = '';
+this.myIngredient='';
+this.myName ='';
+this.myNutriscore ='';
   }
 
-  getRecettes() {
-    this.afDB.list('Recettes/').snapshotChanges(['child_added', 'child_removed']).subscribe(actions => {
+  getRecipes() {
+    this.afDB.list('Recipes/').snapshotChanges(['child_added', 'child_removed']).subscribe(actions => {
       actions.forEach(action =>{
        // console.log(action.payload.exportVal().detailRecette);
-        this.recettes.push({
+        this.recipes.push({
           key: action.key,
-          detailRecette: action.payload.exportVal().detailRecette, 
+          detailRecipe: action.payload.exportVal().detailRecipe, 
           ingredient: action.payload.exportVal().ingredient, 
-          nom: action.payload.exportVal().nom, 
+          name: action.payload.exportVal().name, 
           nutriscore: action.payload.exportVal().nutriscore, 
         })
       });
     })
   }
 
-  deleteRecette(recette: any) {
-    this.recettes.length = 0;
-    this.afDB.list('Recettes/').remove(recette.key);
+  deleteRecipes(recipes: any) {
+    this.recipes.length = 0;
+    this.afDB.list('Recipes/').remove(recipes.key);
   }
 
 }
