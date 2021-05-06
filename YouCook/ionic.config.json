@@ -1,5 +1,7 @@
 {
   "name": "YouCook",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
