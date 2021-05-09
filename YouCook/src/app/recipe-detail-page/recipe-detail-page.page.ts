@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
+import { Recipe } from '../interfaces/recipe';
 
 @Component({
   selector: 'app-recipe-detail-page',
@@ -10,15 +11,19 @@ export class RecipeDetailPagePage implements OnInit {
 
 public prev_page:String='/list';
 
-sub: any;
+myObjRecipe: Recipe 
 
   constructor(private route: ActivatedRoute, private router: Router, ) {
 this.route.params.subscribe(params=> {
 
   console.log('hello', params)
-  if (params.special) {
-    this.sub = JSON.parse(params.special);
-    console.log(this.sub)
+  if (params) {
+     this.myObjRecipe = {  recipeDetail: params.detailRecipe,
+      ingredientName:params.ingredientName,
+      ingredientQuantity:params.ingredientQuantity,
+      name:  params.name,
+      nutriscore:params.nutriscore}
+    console.log(this.myObjRecipe)
   }
 
   if(params.back){

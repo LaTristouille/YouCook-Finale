@@ -1,11 +1,18 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>recipeDetailPage</ion-title>
-  </ion-toolbar>
+ 
+   <!-- <ion-title>{{ recipe.name }}</ion-title>-->
+ 
 </ion-header>
 
 <ion-content>
+ 
+  <div class="recipe-detail" padding>
+    <h2>{{myObjRecipe.name}}</h2>
+    <h4>{{myObjRecipe.nutriscore}}</h4>
+    <h1>{{myObjRecipe.ingredientName}}</h1>
+    <h1>{{myObjRecipe.ingredientQuantity}}</h1>
+    <p>{{myObjRecipe.recipeDetail}}</p>
 
-<p> Salut, 2 eme page</p>
+  </div> 
 
 </ion-content>

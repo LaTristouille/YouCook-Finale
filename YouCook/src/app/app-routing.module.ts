@@ -9,6 +9,14 @@ const routes: Routes = [
   {
     path: 'recipe-detail-page',
     loadChildren: () => import('./recipe-detail-page/recipe-detail-page.module').then( m => m.RecipeDetailPagePageModule)
+  },
+  {
+    path: 'form',
+    loadChildren: () => import('./form/form.module').then( m => m.FormPageModule)
+  },
+  {
+    path: 'tab1',
+    loadChildren: () => import('./tab1/tab1.module').then( m => m.Tab1PageModule)
   }
 ];
 @NgModule({

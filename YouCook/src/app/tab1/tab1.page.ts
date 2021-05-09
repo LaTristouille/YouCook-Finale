@@ -2,8 +2,10 @@ import { ConditionalExpr } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { DataProduct } from '../interfaces/data-product';
+import { Recipe } from '../interfaces/recipe';
 import {NavigationExtras, Router} from '@angular/router';
-
+import {ModalController} from '@ionic/angular';
+import {FormPage} from '../form/form.page';
 
 @Component({
   selector: 'app-tab1',
@@ -13,24 +15,37 @@ import {NavigationExtras, Router} from '@angular/router';
 
 export class Tab1Page {
   myRecipe: string;
-  myIngredient: string;
+  myIngredientName: string;
+  myIngredientQuantity: number;
   myName: string;
   myNutriscore: string;
 
+  objRecipe: Recipe;
   addRecipe: boolean;
   recipes = [];
 
-  constructor(public afDB: AngularFireDatabase, private router: Router) {
 
+  constructor(public afDB: AngularFireDatabase, private router: Router, private modalController:ModalController ) {
     this.getRecipes();
+    this.recipes.length = 0;
+
 
   }
-  addRecipeToFirebase(){
+
+  OpenModal()
+    {
+  this.modalController.create({component:FormPage}).then((modalElement)=>{
+    modalElement.present();
+  })
+    }
+
+  /*addRecipeToFirebase(){
     this.recipes.length = 0;
 
     console.log(this.recipes)
     this.afDB.list('Recipes/').push({
-      ingredient: this.myIngredient,
+      ingredientName: this.myIngredientName,
+      ingredientQuantity: this.myIngredientQuantity,
       detailRecipe: this.myRecipe,
       nutriscore: this.myNutriscore,
       name: this.myName,
@@ -41,10 +56,14 @@ export class Tab1Page {
   showForm() {
 this.addRecipe = !this.addRecipe;
 this.myRecipe = '';
-this.myIngredient='';
+this.myIngredientName='';
+this.myIngredientQuantity=0;
 this.myName ='';
 this.myNutriscore ='';
-  }
+
+
+
+  }*/
 
   getRecipes() {
     this.afDB.list('Recipes/').snapshotChanges(['child_added', 'child_removed']).subscribe(actions => {
@@ -53,7 +72,8 @@ this.myNutriscore ='';
         this.recipes.push({
           key: action.key,
           detailRecipe: action.payload.exportVal().detailRecipe, 
-          ingredient: action.payload.exportVal().ingredient, 
+          ingredientName: action.payload.exportVal().ingredientName, 
+          ingredientQuantity: action.payload.exportVal().ingredientQuantity, 
           name: action.payload.exportVal().name, 
           nutriscore: action.payload.exportVal().nutriscore, 
         })
@@ -67,10 +87,10 @@ this.myNutriscore ='';
     this.afDB.list('Recipes/').remove(recipe.key);
   }
 
-  openRecipes(recipe : any)
-{
- // console.log(recipe)
-  this.router.navigate(['/recipe-detail-page', recipe]);
-}
+    openRecipes(recipe : any)
+  {
+    this.router.navigate(['/recipe-detail-page', recipe]);
+  }
 
 }
+

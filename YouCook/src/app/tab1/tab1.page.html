@@ -12,7 +12,7 @@
     <ion-item  (click)="openRecipes(recipe)">
       <ion-label> 
         <h2>{{recipe.name}} </h2>
-        <p>{{recipe.ingredient}} </p>
+      
         <p>{{recipe.nutriscore}} </p>
         <p>{{recipe.detailRecipe}} </p>
       </ion-label>
@@ -25,10 +25,11 @@
   </ion-item-sliding>
     </ion-card>
 
-  <ion-card   *ngIf="addRecipe">
+  <!--<ion-card   *ngIf="addRecipe">
     <ion-item lines="none">
     <ion-input [(ngModel)]="myRecipe" placeholder="Entrer une recette"> </ion-input>
-    <ion-input [(ngModel)]="myIngredient" placeholder="Entrer un ingredient"> </ion-input>
+    <ion-input [(ngModel)]="myIngredientName" placeholder="Entrer un ingredient"> </ion-input>
+    <ion-input [(ngModel)]="myIngredientQuantity" placeholder="Entrer une quantité"> </ion-input>
     <ion-input [(ngModel)]="myName" placeholder="Entrer un nom"> </ion-input>
     <ion-input [(ngModel)]="myNutriscore" placeholder="Entrer un nutriscore"> </ion-input>
     <ion-button slot="end" shape="round" (click)="addRecipeToFirebase()"> 
@@ -39,18 +40,18 @@
     
     </ion-item>
     
-    </ion-card>
+    </ion-card>-->
 
  
-<ion-button *ngIf="!addRecipes" (click)="showForm()" expand="block" class="add-button">
+<ion-button  (click)="OpenModal()" expand="block" class="add-button">
 <ion-icon name="add" slot="start"> </ion-icon>
 Ajouter une recette
 </ion-button>
 
-<ion-button *ngIf="addRecipes" (click)="showForm()" expand="block" class="add-button">
+<!--<ion-button *ngIf="addRecipes" (click)="showForm()" expand="block" class="add-button">
   <ion-icon name="close" slot="start"> </ion-icon>
 Annuler  
-  </ion-button>
+  </ion-button> -->
 
 
 
