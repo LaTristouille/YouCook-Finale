@@ -12,9 +12,12 @@ import {BarcodeScanner, BarcodeScannerOptions} from '@ionic-native/barcode-scann
 export class Tab2Page {
   scanActive = false;
   scannedData: any;
-  public codeBar = 3017620422003;
+  codeBar = null ;
+  codee = null;
+
+
   public productData: DataProduct = {
-    codeBar: -1,
+    codeBar: 1,
     name: '',
     image: '',
     nutriscore: '',
@@ -24,39 +27,42 @@ export class Tab2Page {
   constructor(public barcodeCtrl: BarcodeScanner,private router: Router,
               private route: ActivatedRoute,
               private loadJson: LoadJsonService) {
-    this.route.params.subscribe(params => {
-      if (params.codeBar) {
-        this.codeBar = params.codeBar;
-      }
-      this.getProduct();
-    });
   }
 
-  async goToBarcodeScan() {
+   code() {
+     this.codee= this.scannedData.productData;
+   }
+
+  goToBarcodeScan() {
 
     const options: BarcodeScannerOptions = {
       preferFrontCamera: false,
       showFlipCameraButton: true,
       showTorchButton: true,
       torchOn: false,
-      prompt: 'placer le code bar dans la zeone de scane',
+      prompt: 'placer le code bar dans la zone de scane',
       resultDisplayDuration: 3000,
       formats: 'DATA_MATRIX,UPC_E,UPC_A,EAN_8,EAN_13,CODE_128,CODE_39,CODE_39,CODE_93,CODABAR,ITF,RSS14,RSS_EXPANDED,PDF_417,AZTEC,MSI',
       orientation: 'portrait',
+      disableSuccessBeep: false,
     };
 
     this.barcodeCtrl.scan(options).then(barcodeData => {
-      console.log('Barcode data', barcodeData);
-      this.scannedData = barcodeData;
+      console.log('Barcode data', barcodeData.text);
+      this.codeBar= Number(barcodeData.text);
+      this.route.params.subscribe(params => {
+        if (params.codeBar) {
+          this.codeBar = params.codeBar;
+        }
+        this.getProduct();
+      });
 
     }).catch(err => {
       console.log('Error', err);
     });
+    this.code();
   }
 
-  stopScan() {
-    this.scanActive = false;
-  }
 
   public getProduct() {
     const url = `https://world.openfoodfacts.org/api/v0/product/${this.codeBar}.json`;
