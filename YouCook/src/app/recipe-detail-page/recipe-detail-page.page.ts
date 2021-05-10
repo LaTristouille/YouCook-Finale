@@ -19,10 +19,10 @@ this.route.params.subscribe(params=> {
   console.log('hello', params)
   if (params) {
      this.myObjRecipe = {  recipeDetail: params.detailRecipe,
+      ingredientNutriscore:params.nutriscore,
       ingredientName:params.ingredientName,
       ingredientQuantity:params.ingredientQuantity,
-      name:  params.name,
-      nutriscore:params.nutriscore}
+      name:  params.name}
     console.log(this.myObjRecipe)
   }
 

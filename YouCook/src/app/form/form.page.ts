@@ -16,8 +16,13 @@ export class FormPage implements OnInit {
   myRecipe: string;
   myIngredientName: string;
   myIngredientQuantity: number;
-  myName: string;
   myNutriscore: string;
+
+  myIngredientName2: string;
+  myIngredientQuantity2: number;
+  myNutriscore2: string;
+
+  myName: string;
 
   objRecipe: Recipe;
   addRecipe: boolean;
@@ -38,8 +43,14 @@ export class FormPage implements OnInit {
     this.afDB.list('Recipes/').push({
       ingredientName: this.myIngredientName,
       ingredientQuantity: this.myIngredientQuantity,
-      detailRecipe: this.myRecipe,
       nutriscore: this.myNutriscore,
+
+      ingredientName2: this.myIngredientName,
+      ingredientQuantity2: this.myIngredientQuantity,
+      nutriscore2: this.myNutriscore,
+
+
+      detailRecipe: this.myRecipe,
       name: this.myName,
     });
     console.log(this.recipes)

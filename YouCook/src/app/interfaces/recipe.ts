@@ -6,6 +6,6 @@ export interface Recipe {
     recipeDetail: string;
     ingredientName: Ingredient['name'];
     ingredientQuantity: Ingredient['quantity'];
+    ingredientNutriscore: Ingredient['nutriscore'];
     name: string;
-    nutriscore: string;
 }

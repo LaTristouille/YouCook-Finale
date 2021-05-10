@@ -20,18 +20,27 @@
             <ion-input  [(ngModel)]="myRecipe" type="text"></ion-input>
         </ion-item>
       <ion-item>
-            <ion-label position="floating">Entrer un ingredient</ion-label>
+            <ion-label position="floating">Entrer un premier ingredient</ion-label>
             <ion-input [(ngModel)]="myIngredientName" type="text"></ion-input>
-        </ion-item>
-        <ion-item>
+       
             <ion-label position="floating">Entrer une quantité</ion-label>
             <ion-input  [(ngModel)]="myIngredientQuantity" type="number"></ion-input>
-        </ion-item>
-        
-      <ion-item>
+      
         <ion-label position="floating">Entrer un nutriscore</ion-label>
         <ion-input  [(ngModel)]="myNutriscore" type="text"></ion-input>
     </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Entrer un deuxieme ingredient</ion-label>
+      <ion-input [(ngModel)]="myIngredientName2" type="text"></ion-input>
+ 
+      <ion-label position="floating">Entrer une quantité</ion-label>
+      <ion-input  [(ngModel)]="myIngredientQuantity2" type="number"></ion-input>
+
+  <ion-label position="floating">Entrer un nutriscore</ion-label>
+  <ion-input  [(ngModel)]="myNutriscore2" type="text"></ion-input>
+</ion-item>
+
     <ion-item> 
     <ion-button href="/tab1" slot="end" shape="round" (click)="addRecipeToFirebase()"> 
       <ion-icon name="add" slot="icon-only"> 
