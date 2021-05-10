@@ -27,7 +27,6 @@ export class Tab1Page {
 
   constructor(public afDB: AngularFireDatabase, private router: Router, private modalController:ModalController ) {
     this.getRecipes();
-    this.recipes.length = 0;
 
 
   }

@@ -20,25 +20,30 @@
             <ion-input  [(ngModel)]="myRecipe" type="text"></ion-input>
         </ion-item>
       <ion-item>
-            <ion-label position="floating">Entrer un premier ingredient</ion-label>
-            <ion-input [(ngModel)]="myIngredientName" type="text"></ion-input>
+        <ion-card class="welcome-card">
+          <img src="/assets/scan.jpeg" alt="" />
+          <ion-button expand='block' margin (click)="goToBarcodeScan()">Ajouter un 1 er ingrédient</ion-button>
+        </ion-card>
+        <ion-label>  {{ productData.name }}> </ion-label>
        
             <ion-label position="floating">Entrer une quantité</ion-label>
             <ion-input  [(ngModel)]="myIngredientQuantity" type="number"></ion-input>
       
-        <ion-label position="floating">Entrer un nutriscore</ion-label>
-        <ion-input  [(ngModel)]="myNutriscore" type="text"></ion-input>
+            <ion-label *ngIf="productData.nutriscore">Nutriscore : {{productData.nutriscore}}</ion-label><br>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Entrer un deuxieme ingredient</ion-label>
+      <ion-card class="welcome-card">
+        <img src="/assets/scan.jpeg" alt="" />
+        <ion-button expand='block' margin (click)="goToBarcodeScan()">Ajouter un 2 eme ingrédient</ion-button>
+      </ion-card>
+      <ion-label>  {{ productData.name }}> </ion-label>
       <ion-input [(ngModel)]="myIngredientName2" type="text"></ion-input>
  
       <ion-label position="floating">Entrer une quantité</ion-label>
       <ion-input  [(ngModel)]="myIngredientQuantity2" type="number"></ion-input>
 
-  <ion-label position="floating">Entrer un nutriscore</ion-label>
-  <ion-input  [(ngModel)]="myNutriscore2" type="text"></ion-input>
+      <ion-label *ngIf="productData.nutriscore">Nutriscore : {{productData.nutriscore}}</ion-label><br>
 </ion-item>
 
     <ion-item> 
