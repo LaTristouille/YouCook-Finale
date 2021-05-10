@@ -21,6 +21,7 @@ export class Tab2Page {
     name: '',
     image: '',
     nutriscore: '',
+    nutriscoreNote: -1,
     allergen: ''
   };
 
@@ -76,6 +77,7 @@ export class Tab2Page {
       name: data.product.generic_name_it,
       image: data.product.image_front_url,
       nutriscore: data.product.nutrition_grade_fr,
+      nutriscoreNote: data.product.nutriscore_score,
       allergen: data.product.allergens_from_user
     };
     //console.log(this.productData);

@@ -1,5 +1,3 @@
-
-
 <ion-content >
 
   <ion-item>
@@ -14,60 +12,36 @@
       <ion-item>
         <ion-label position="floating">Entrer un nom</ion-label>
         <ion-input [(ngModel)]="myName"type="text"></ion-input>
-    </ion-item>
-        <ion-item>
-            <ion-label position="floating">Entrer une recette</ion-label>
-            <ion-input  [(ngModel)]="myRecipe" type="text"></ion-input>
-        </ion-item>
+      </ion-item>
       <ion-item>
-            <ion-label position="floating">Entrer un premier ingredient</ion-label>
-            <ion-input [(ngModel)]="myIngredientName" type="text"></ion-input>
-       
-            <ion-label position="floating">Entrer une quantité</ion-label>
-            <ion-input  [(ngModel)]="myIngredientQuantity" type="number"></ion-input>
-      
-        <ion-label position="floating">Entrer un nutriscore</ion-label>
-        <ion-input  [(ngModel)]="myNutriscore" type="text"></ion-input>
-    </ion-item>
+        <ion-label position="floating">Entrer une recette</ion-label>
+        <ion-input  [(ngModel)]="myRecipe" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-button expand='block' margin (click)="goToBarcodeScan()" slot="start">Ajoutez un 1 er ingredient</ion-button>
+        <ion-label position="floating">{{ productData.name }}</ion-label>
 
-    <ion-item>
-      <ion-label position="floating">Entrer un deuxieme ingredient</ion-label>
-      <ion-input [(ngModel)]="myIngredientName2" type="text"></ion-input>
- 
-      <ion-label position="floating">Entrer une quantité</ion-label>
-      <ion-input  [(ngModel)]="myIngredientQuantity2" type="number"></ion-input>
+        <ion-label position="floating">Entrer une quantité</ion-label>
+        <ion-input  [(ngModel)]="myIngredientQuantity" type="number"></ion-input>
+      </ion-item>
 
-  <ion-label position="floating">Entrer un nutriscore</ion-label>
-  <ion-input  [(ngModel)]="myNutriscore2" type="text"></ion-input>
-</ion-item>
+      <ion-item>
+        <ion-button expand='block' margin (click)="goToBarcodeScan()" slot="start">Ajoutez un 2eme ingredient</ion-button>
+        <ion-label position="floating">"{{ productData.name }}"</ion-label>
 
-    <ion-item> 
-    <ion-button href="/tab1" slot="end" shape="round" (click)="addRecipeToFirebase()"> 
-      <ion-icon name="add" slot="icon-only"> 
+        <ion-label position="floating">Entrer une quantité</ion-label>
+        <ion-input  [(ngModel)]="myIngredientQuantity2" type="number"></ion-input>
 
-      </ion-icon>
-    </ion-button>
-  </ion-item>
-  
+      </ion-item>
+
+      <ion-item>
+        <ion-button href="/tab1" slot="end" shape="round" (click)="addRecipeToFirebase()">
+          <ion-icon name="add" slot="icon-only">
+
+          </ion-icon>
+        </ion-button>
+      </ion-item>
+
     </form>
-</ion-list>
-<!--
-  <ion-card  >
-    <ion-item lines="none">
-    <ion-input [(ngModel)]="myRecipe" placeholder="Entrer une recette"> </ion-input>
-    <ion-input [(ngModel)]="myIngredientName" placeholder="Entrer un ingredient"> </ion-input>
-    <ion-input [(ngModel)]="myIngredientQuantity" placeholder="Entrer une quantité"> </ion-input>
-    <ion-input [(ngModel)]="myName" placeholder="Entrer un nom"> </ion-input>
-    <ion-input [(ngModel)]="myNutriscore" placeholder="Entrer un nutriscore"> </ion-input>
-    <ion-button slot="end" shape="round" (click)="addRecipeToFirebase()"> 
-      <ion-icon name="add" slot="icon-only"> 
-
-      </ion-icon>
-    </ion-button>
-    
-    </ion-item>
-    
-    </ion-card>
-  -->
-
+  </ion-list>
 </ion-content>

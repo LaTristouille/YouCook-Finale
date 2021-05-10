@@ -75,7 +75,7 @@ this.myNutriscore ='';
           ingredientName: action.payload.exportVal().ingredientName, 
           ingredientQuantity: action.payload.exportVal().ingredientQuantity, 
           name: action.payload.exportVal().name, 
-          nutriscore: action.payload.exportVal().nutriscore, 
+          nutriscore: action.payload.exportVal().nutriscore,
         })
       });
     })
