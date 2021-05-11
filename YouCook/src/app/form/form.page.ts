@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {ModalController, NavController, NavParams} from '@ionic/angular';
-import {Recipe} from '../interfaces/recipe';
-import {ConditionalExpr} from '@angular/compiler';
-import {AngularFireDatabase} from '@angular/fire/database';
-import {DataProduct} from '../interfaces/data-product';
+import { Component, OnInit } from '@angular/core';
+import {ModalController} from '@ionic/angular';
+import { Recipe } from '../interfaces/recipe';
+import { ConditionalExpr } from '@angular/compiler';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { DataProduct } from '../interfaces/data-product';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
-import {BarcodeScanner, BarcodeScannerOptions} from "@ionic-native/barcode-scanner/ngx";
+import {BarcodeScanner, BarcodeScannerOptions} from '@ionic-native/barcode-scanner/ngx';
 import {LoadJsonService} from '../services/load-json.service';
-import {FormBuilder, FormArray, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -19,20 +19,20 @@ export class FormPage implements OnInit {
   myRecipe: string;
   myIngredientName: string;
   myIngredientQuantity: number;
-  myNutriscore: string;
-
-
+  myIngredientQuantity2: number;
   myName: string;
-
-  objRecipe: Recipe;
-  addRecipe: boolean;
   recipes = [];
 
   scannedData: any;
-  codeBar = null;
+  codeBar = null ;
   codee = null;
 
   dataName: string = '';
+
+  //calcul nutriscore
+  /*ponderationQuantity: number;
+  noteRecipe: number;*/
+
   /**
    * @name form
    * @type {FormGroup}
@@ -97,7 +97,6 @@ export class FormPage implements OnInit {
     console.dir(val);
   }
 
-
   public productData: DataProduct = {
     codeBar: 1,
     name: '',
@@ -113,56 +112,43 @@ export class FormPage implements OnInit {
     private router: Router,
     public barcodeCtrl: BarcodeScanner,
     private route: ActivatedRoute,
-    private loadJson: LoadJsonService,
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    private _FB: FormBuilder) {
-
-    this.form = this._FB.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-      recipe: this._FB.array([
-        this.initTechnologyFields()
-      ])
-    });
-  }
+    private loadJson: LoadJsonService) { }
 
   ngOnInit() {
   }
-
-  CloseModal() {
+  CloseModal(){
     this.modalController.dismiss();
   }
 
-
-  addRecipeToFirebase() {
+  addRecipeToFirebase(){
     this.recipes.length = 0;
 
     console.log('addRecipeToFirebase -> this.productData', this.productData);
 
-    this.recipes.push()
     console.log('addRecipeToFirebase 1er : ', this.recipes);
     this.afDB.list('Recipes/').push({
       ingredientName: this.productData.name,
       ingredientQuantity: this.myIngredientQuantity,
       nutriscore: this.productData.nutriscore,
-
-      // ingredientName2: this.productData.name,
-      // ingredientQuantity2: this.myIngredientQuantity2,
-      // nutriscore2: this.productData.nutriscore,
-
+      nutriscoreNote: this.productData.nutriscore,
 
       detailRecipe: this.myRecipe,
       name: this.myName,
+      //recipeNutriscoreNote: this.calculRecipeNutriscore(this.myIngredientQuantity, this.nutriscoreNote)
     });
-    //console.log('addRecipeToFirebase 2e : ', this.recipes);
+    console.log('addRecipeToFirebase 2e : ', this.recipes);
   }
+
+  /*calculRecipeNutriscore(quantity, ingredientNote) {
+    this.ponderationQuantity = (quantity * ingredientNote) / 100;
+    this.noteRecipe += this.ponderationQuantity;
+  }*/
 
   code() {
-    this.codee = this.scannedData.productData;
+    this.codee= this.scannedData.productData;
   }
 
-  goToBarcodeScan(id :number) {
+  goToBarcodeScan() {
 
     const options: BarcodeScannerOptions = {
       preferFrontCamera: false,
@@ -178,12 +164,12 @@ export class FormPage implements OnInit {
 
     this.barcodeCtrl.scan(options).then(barcodeData => {
       console.log('Barcode data', barcodeData.text);
-      this.codeBar = Number(barcodeData.text);
+      this.codeBar= Number(barcodeData.text);
       this.route.params.subscribe(params => {
         if (params.codeBar) {
           this.codeBar = params.codeBar;
         }
-        this.getProduct(id);
+        this.getProduct();
       });
 
     }).catch(err => {
@@ -193,12 +179,12 @@ export class FormPage implements OnInit {
   }
 
 
-  public getProduct(id : number) {
+  public getProduct() {
     const url = `https://world.openfoodfacts.org/api/v0/product/${this.codeBar}.json`;
-    this.loadJson.getJSON(url).subscribe(data => this.handleData(data,id));
+    this.loadJson.getJSON(url).subscribe(data => this.handleData(data));
   }
 
-  public handleData(data: any,id: number) {
+  public handleData(data: any) {
     console.log(`handleData : `, data);
 
     if (data.product.generic_name_it == null) {
@@ -214,16 +200,8 @@ export class FormPage implements OnInit {
       nutriscore: data.product.nutrition_grade_fr,
       nutriscoreNote: data.product.nutriscore_score,
       allergen: data.product.allergens_from_user
-
     };
-    this.form.controls.recipe[id]
-    console.log(this.form.controls.recipe[id])
     console.log('handleData -> this.productData', this.productData);
   }
-
-  /*calculRecipeNutriscore(quantity, note) {
-    ponderationQuantity = (quantity * note) / 100;
-    noteRecipe =
-  }*/
 
 }
