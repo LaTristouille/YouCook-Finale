@@ -6,21 +6,25 @@
 
 <ion-content>
 
- <div class="recipe-detail" padding>
+
    <h1>{{myObjRecipe.name}}</h1>
-   <h2>{{myObjRecipe.note}}</h2>
+   <div class="content">
+   <img class="nutriscoreImage" *ngIf="myObjRecipe.note == 'A'" src="../../assets/images/nutriscore-a.png" alt="Nutriscore A"/>
+        <img class="nutriscoreImage" *ngIf="myObjRecipe.note == 'B'" src="../../assets/images/nutriscore-b.png" alt="Nutriscore B"/>
+        <img class="nutriscoreImage" *ngIf="myObjRecipe.note == 'C'" src="../../assets/images/nutriscore-c.png" alt="Nutriscore C"/>
+        <img class="nutriscoreImage" *ngIf="myObjRecipe.note == 'D'" src="../../assets/images/nutriscore-d.png" alt="Nutriscore D"/>
+        <img class="nutriscoreImage" *ngIf="myObjRecipe.note == 'E'" src="../../assets/images/nutriscore-e.png" alt="Nutriscore E"/>
    <h4>{{myObjRecipe.ingredientName}}</h4>
-   <h5>{{myObjRecipe.ingredientQuantity}}</h5>
+   <h5 >{{myObjRecipe.ingredientQuantity}} g</h5>
    <h4>{{myObjRecipe.ingredientName2}}</h4>
-   <h5>{{myObjRecipe.ingredientQuantity2}}</h5>
+   <h5  *ngIf="myObjRecipe.ingredientQuantity2" >{{myObjRecipe.ingredientQuantity2}} g</h5>
    <h4>{{myObjRecipe.ingredientName3}}</h4>
-   <h5>{{myObjRecipe.ingredientQuantity3}}</h5>
+   <h5  *ngIf="myObjRecipe.ingredientQuantity2">{{myObjRecipe.ingredientQuantity3}} g</h5>
    <h4>{{myObjRecipe.ingredientName4}}</h4>
-   <h5>{{myObjRecipe.ingredientQuantity4}}</h5>
+   <h5  *ngIf="myObjRecipe.ingredientQuantity2">{{myObjRecipe.ingredientQuantity4}} g</h5>
    <h4>{{myObjRecipe.ingredientName5}}</h4>
-   <h5>{{myObjRecipe.ingredientQuantity5}}</h5>
+   <h5  *ngIf="myObjRecipe.ingredientQuantity2">{{myObjRecipe.ingredientQuantity5}} g</h5>
    <p>{{myObjRecipe.recipeDetail}}</p>
 
- </div> 
-
+  </div>
 </ion-content>
