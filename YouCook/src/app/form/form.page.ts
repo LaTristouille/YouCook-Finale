@@ -16,9 +16,9 @@ import { LoadingController, AlertController } from '@ionic/angular';
   styleUrls: ['./form.page.scss'],
 })
 export class FormPage implements OnInit {
-  myRecipe: string;
+  myRecipe: Text;
   myIngredientName: string;
-  myIngredientQuantity: number;
+  myIngredientQuantity: number=0;
   myNutriscore: string;
 
   myIngredientName2: string;
