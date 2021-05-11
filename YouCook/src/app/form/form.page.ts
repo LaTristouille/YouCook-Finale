@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import {ModalController} from '@ionic/angular';
-import { Recipe } from '../interfaces/recipe';
-import { ConditionalExpr } from '@angular/compiler';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { DataProduct } from '../interfaces/data-product';
+import {Component, OnInit} from '@angular/core';
+import {ModalController, NavController, NavParams} from '@ionic/angular';
+import {Recipe} from '../interfaces/recipe';
+import {ConditionalExpr} from '@angular/compiler';
+import {AngularFireDatabase} from '@angular/fire/database';
+import {DataProduct} from '../interfaces/data-product';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {BarcodeScanner, BarcodeScannerOptions} from "@ionic-native/barcode-scanner/ngx";
 import {LoadJsonService} from '../services/load-json.service';
+import {FormBuilder, FormArray, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -20,9 +21,6 @@ export class FormPage implements OnInit {
   myIngredientQuantity: number;
   myNutriscore: string;
 
-  myIngredientName2: string;
-  myIngredientQuantity2: number;
-  myNutriscore2: string;
 
   myName: string;
 
@@ -31,10 +29,74 @@ export class FormPage implements OnInit {
   recipes = [];
 
   scannedData: any;
-  codeBar = null ;
+  codeBar = null;
   codee = null;
 
-  dataName : string = '';
+  dataName: string = '';
+  /**
+   * @name form
+   * @type {FormGroup}
+   * @public
+   * @description     Defines a FormGroup object for managing the template form
+   */
+  public form: FormGroup;
+
+  /**
+   * Generates a FormGroup object with input field validation rules for
+   * the technologies form object
+   *
+   * @public
+   * @method initTechnologyFields
+   * @return {FormGroup}
+   */
+  initTechnologyFields(): FormGroup {
+    return this._FB.group({
+      ingredientName: this.productData.name,
+      quantity: ['', Validators.required],
+      nutriscore: this.productData.nutriscore,
+    });
+  }
+
+  /**
+   * Programmatically generates a new technology input field
+   *
+   * @public
+   * @method addNewInputField
+   * @return {none}
+   */
+  addNewInputField(): void {
+    const control = <FormArray>this.form.controls.recipe;
+    control.push(this.initTechnologyFields());
+
+  }
+
+
+  /**
+   * Programmatically removes a recently generated technology input field
+   *
+   * @public
+   * @method removeInputField
+   * @param i    {number}      The position of the object in the array that needs to removed
+   * @return {none}
+   */
+  removeInputField(i: number): void {
+    const control = <FormArray>this.form.controls.recipe;
+    control.removeAt(i);
+  }
+
+
+  /**
+   * Receive the submitted form data
+   *
+   * @public
+   * @method manage
+   * @param val    {object}      The posted form data
+   * @return {none}
+   */
+  manage(val: any): void {
+    console.dir(val);
+  }
+
 
   public productData: DataProduct = {
     codeBar: 1,
@@ -51,41 +113,56 @@ export class FormPage implements OnInit {
     private router: Router,
     public barcodeCtrl: BarcodeScanner,
     private route: ActivatedRoute,
-    private loadJson: LoadJsonService) { }
+    private loadJson: LoadJsonService,
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private _FB: FormBuilder) {
+
+    this.form = this._FB.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      recipe: this._FB.array([
+        this.initTechnologyFields()
+      ])
+    });
+  }
 
   ngOnInit() {
   }
-  CloseModal(){
+
+  CloseModal() {
     this.modalController.dismiss();
   }
 
-  addRecipeToFirebase(){
+
+  addRecipeToFirebase() {
     this.recipes.length = 0;
 
     console.log('addRecipeToFirebase -> this.productData', this.productData);
 
+    this.recipes.push()
     console.log('addRecipeToFirebase 1er : ', this.recipes);
     this.afDB.list('Recipes/').push({
       ingredientName: this.productData.name,
       ingredientQuantity: this.myIngredientQuantity,
       nutriscore: this.productData.nutriscore,
 
-      ingredientName2: this.productData.name,
-      ingredientQuantity2: this.myIngredientQuantity2,
-      nutriscore2: this.productData.nutriscore,
+      // ingredientName2: this.productData.name,
+      // ingredientQuantity2: this.myIngredientQuantity2,
+      // nutriscore2: this.productData.nutriscore,
 
 
       detailRecipe: this.myRecipe,
       name: this.myName,
     });
-    console.log('addRecipeToFirebase 2e : ', this.recipes);
+    //console.log('addRecipeToFirebase 2e : ', this.recipes);
   }
 
   code() {
-    this.codee= this.scannedData.productData;
+    this.codee = this.scannedData.productData;
   }
 
-  goToBarcodeScan() {
+  goToBarcodeScan(id :number) {
 
     const options: BarcodeScannerOptions = {
       preferFrontCamera: false,
@@ -101,12 +178,12 @@ export class FormPage implements OnInit {
 
     this.barcodeCtrl.scan(options).then(barcodeData => {
       console.log('Barcode data', barcodeData.text);
-      this.codeBar= Number(barcodeData.text);
+      this.codeBar = Number(barcodeData.text);
       this.route.params.subscribe(params => {
         if (params.codeBar) {
           this.codeBar = params.codeBar;
         }
-        this.getProduct();
+        this.getProduct(id);
       });
 
     }).catch(err => {
@@ -116,12 +193,12 @@ export class FormPage implements OnInit {
   }
 
 
-  public getProduct() {
+  public getProduct(id : number) {
     const url = `https://world.openfoodfacts.org/api/v0/product/${this.codeBar}.json`;
-    this.loadJson.getJSON(url).subscribe(data => this.handleData(data));
+    this.loadJson.getJSON(url).subscribe(data => this.handleData(data,id));
   }
 
-  public handleData(data: any) {
+  public handleData(data: any,id: number) {
     console.log(`handleData : `, data);
 
     if (data.product.generic_name_it == null) {
@@ -137,7 +214,10 @@ export class FormPage implements OnInit {
       nutriscore: data.product.nutrition_grade_fr,
       nutriscoreNote: data.product.nutriscore_score,
       allergen: data.product.allergens_from_user
+
     };
+    this.form.controls.recipe[id]
+    console.log(this.form.controls.recipe[id])
     console.log('handleData -> this.productData', this.productData);
   }
 
