@@ -12,8 +12,13 @@
     <ion-item  (click)="openRecipes(recipe)">
       <ion-label> 
         <h2>{{recipe.name}} </h2>
-      
-        <p style="color:red;">{{recipe.note}} </p>
+
+        <img class="nutriscoreImage" *ngIf="recipe.note == 'A'" src="../../assets/images/nutriscore-a.png" alt="Nutriscore A"/>
+        <img *ngIf="recipe.note == 'B'" src="../../assets/images/nutriscore-b.png" alt="Nutriscore B"/>
+        <img *ngIf="recipe.note == 'C'" src="../../assets/images/nutriscore-c.png" alt="Nutriscore C"/>
+        <img *ngIf="recipe.note == 'D'" src="../../assets/images/nutriscore-d.png" alt="Nutriscore D"/>
+        <img *ngIf="recipe.note == 'E'" src="../../assets/images/nutriscore-e.png" alt="Nutriscore E"/>
+
         <p>{{recipe.detailRecipe}} </p>
       </ion-label>
     </ion-item>
