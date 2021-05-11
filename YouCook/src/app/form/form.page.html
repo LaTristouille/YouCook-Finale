@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content >
 
   <ion-item>
     <ion-label> Modal Popup</ion-label>
@@ -6,124 +6,40 @@
       close
     </ion-button>
   </ion-item>
-
   <ion-list lines="none">
-    <!--    <form [formGroup]="slideOneForm">-->
-    <!--      <ion-item>-->
-    <!--        <ion-label position="floating">Entrer un nom</ion-label>-->
-    <!--        <ion-input [(ngModel)]="myName" type="text"></ion-input>-->
-    <!--      </ion-item>-->
-    <!--      <ion-item>-->
-    <!--        <ion-label position="floating">Entrer une recette</ion-label>-->
-    <!--        <ion-input [(ngModel)]="myRecipe" type="text"></ion-input>-->
-    <!--      </ion-item>-->
-    <!--      <ion-item>-->
-    <!--        <ion-button expand='block' margin (click)="goToBarcodeScan()" slot="start">Ajoutez un 1 er ingredient-->
-    <!--        </ion-button>-->
-    <!--        <ion-label position="floating">{{ productData.name }}</ion-label>-->
 
-    <!--        <ion-label position="floating">Entrer une quantité</ion-label>-->
-    <!--        <ion-input [(ngModel)]="myIngredientQuantity" type="number"></ion-input>-->
-    <!--      </ion-item>-->
+      <ion-item>
+        <ion-label position="floating">Entrer un nom</ion-label>
+        <ion-input [(ngModel)]="myName"type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Entrer une recette</ion-label>
+        <ion-input  [(ngModel)]="myRecipe" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-button expand='block' margin (click)="goToBarcodeScan()" slot="start">Ajoutez un 1 er ingredient</ion-button>
+        <ion-label position="floating">{{ productData.name }}</ion-label>
 
-    <!--      <ion-item>-->
-    <!--        <ion-button href="/tab1" slot="end" shape="round" (click)="addRecipeToFirebase()">-->
-    <!--          <ion-icon name="add" slot="icon-only">-->
+        <ion-label position="floating">Entrer une quantité</ion-label>
+        <ion-input  [(ngModel)]="myIngredientQuantity" type="number"></ion-input>
+      </ion-item>
 
-    <!--          </ion-icon>-->
-    <!--        </ion-button>-->
-    <!--      </ion-item>-->
+      <ion-item>
+        <ion-button expand='block' margin (click)="goToBarcodeScan()" slot="start">Ajoutez un 2eme ingredient</ion-button>
+        <ion-label position="floating">{{ productData2.name }}</ion-label>
 
-    <!--    </form>-->
+        <ion-label position="floating">Entrer une quantité</ion-label>
+        <ion-input  [(ngModel)]="myIngredientQuantity2" type="number"></ion-input>
 
-    <form
-      [formGroup]="form"
-      (ngSubmit)="manage(form.value)">
-      <ion-list
-        margin-bottom>
-        <ion-item
-          margin-bottom
-          no-lines>
-          <ion-label floating>Nom de la recette:</ion-label>
+      </ion-item>
 
-          <!-- Assign our first FormControl of name to the input field -->
-          <ion-input
-            type="text"
-            maxlength="40"
-            formControlName="name"></ion-input>
+      <ion-item>
+        <ion-button href="/tab1" slot="end" shape="round" (click)="addRecipeToFirebase()">
+          <ion-icon name="add" slot="icon-only">
 
-        </ion-item>
+          </ion-icon>
+        </ion-button>
+      </ion-item>
 
-        <ion-item>
-          <ion-label floating>Description de la recette:</ion-label>
-          <ion-input
-            type="text"
-            maxlength="40"
-            formControlName="description"></ion-input>
-        </ion-item>
-
-
-        <!-- Assign the technologies FormArray to the form
-             where we want to track/generate new input track fields -->
-        <div
-          formArrayName="recipe"
-          margin-bottom>
-
-
-          <!-- Assign a FormGroupName property binding to track
-               and manage each separate generated input field.
-               Also iterate through the technologies FormArray to
-               correctly track/render new input fields against
-               existing fields -->
-          <section
-            [formGroupName]="i"
-            *ngFor="let tech of form.controls.recipe.controls; let i = index">
-            <ion-item-group>
-              <ion-item-divider color="light">Ingredien :{{ i + 1 }}</ion-item-divider>
-              <ion-item>
-                <ion-button expand='block'  (click)="goToBarcodeScan(i)" slot="start">Scanner l'ingredien :{{ i + 1 }}
-                </ion-button>
-
-              </ion-item>
-
-              <ion-item>
-                <ion-label floating>Quantity de l'ingredien:</ion-label>
-                <ion-input
-                  type="text"
-                  maxlength="50"
-                  formControlName="quantity"></ion-input>
-              </ion-item>
-              <!-- Allow generated input field to be removed -->
-              <span *ngIf="form.controls.recipe.length > 1"
-                    (click)="removeInputField(i)">
-                     <ion-icon name="close"></ion-icon>
-                     Remove
-                  </span>
-            </ion-item-group>
-          </section>
-        </div>
-
-
-        <!-- Allow new input field to be generated/added -->
-        <span (click)="addNewInputField()">
-               <ion-icon name="add"></ion-icon>
-               Ajouter un nouveau ingredient
-         </span>
-
-
-      </ion-list>
-
-
-      <!-- Only allow form to be submitted IF validation criteria for
-              input fields has been successfully passed -->
-      <button
-        ion-button
-        block
-        margin-top
-        color="primary"
-        text-center
-        [disabled]="!form.valid">Submit
-      </button>
-    </form>
   </ion-list>
 </ion-content>

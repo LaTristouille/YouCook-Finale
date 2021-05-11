@@ -28,8 +28,6 @@ export class Tab1Page {
   constructor(public afDB: AngularFireDatabase, private router: Router, private modalController:ModalController ) {
     this.getRecipes();
     this.recipes.length = 0;
-
-
   }
 
   OpenModal()
@@ -74,8 +72,11 @@ this.myNutriscore ='';
           detailRecipe: action.payload.exportVal().detailRecipe, 
           ingredientName: action.payload.exportVal().ingredientName, 
           ingredientQuantity: action.payload.exportVal().ingredientQuantity, 
+          ingredientName2: action.payload.exportVal().ingredientName2, 
+          ingredientQuantity2: action.payload.exportVal().ingredientQuantity2, 
           name: action.payload.exportVal().name, 
           nutriscore: action.payload.exportVal().nutriscore,
+          nutriscore2: action.payload.exportVal().nutriscore2,
         })
       });
     })
