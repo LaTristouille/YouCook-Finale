@@ -17,7 +17,7 @@
         <ion-input  [(ngModel)]="myRecipe" type="text"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-button expand='block' margin (click)="goToBarcodeScan()" slot="start">Ajoutez un 1 er ingredient</ion-button>
+        <ion-button expand='block' margin (click)="goToBarcodeScan()" slot="start">Ajoutez un 1er ingredient</ion-button>
         <ion-label position="floating">{{ productData.name }}</ion-label>
 
         <ion-label position="floating">Entrer une quantité</ion-label>
@@ -31,6 +31,31 @@
         <ion-label position="floating">Entrer une quantité</ion-label>
         <ion-input  [(ngModel)]="myIngredientQuantity2" type="number"></ion-input>
 
+      </ion-item>
+
+      <ion-item>
+        <ion-button expand='block' margin (click)="goToBarcodeScan()" slot="start">Ajoutez un 3eme ingredient</ion-button>
+        <ion-label position="floating">{{ productData3.name }}</ion-label>
+
+        <ion-label position="floating">Entrer une quantité</ion-label>
+        <ion-input  [(ngModel)]="myIngredientQuantity3" type="number"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-button expand='block' margin (click)="goToBarcodeScan()" slot="start">Ajoutez un 4eme ingredient</ion-button>
+        <ion-label position="floating">{{ productData4.name }}</ion-label>
+
+        <ion-label position="floating">Entrer une quantité</ion-label>
+        <ion-input  [(ngModel)]="myIngredientQuantity4" type="number"></ion-input>
+
+      </ion-item>
+
+      <ion-item>
+        <ion-button expand='block' margin (click)="goToBarcodeScan()" slot="start">Ajoutez un 5eme ingredient</ion-button>
+        <ion-label position="floating">{{ productData5.name }}</ion-label>
+
+        <ion-label position="floating">Entrer une quantité</ion-label>
+        <ion-input  [(ngModel)]="myIngredientQuantity5" type="number"></ion-input>
       </ion-item>
 
       <ion-item>

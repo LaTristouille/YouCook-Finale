@@ -25,6 +25,19 @@ export class FormPage implements OnInit {
   myIngredientQuantity2: number=0;
   myNutriscore2: string;
 
+  myIngredientName3: string;
+  myIngredientQuantity3: number=0;
+  myNutriscore3: string;
+
+  myIngredientName4: string;
+  myIngredientQuantity4: number=0;
+  myNutriscore4: string;
+
+  myIngredientName5: string;
+  myIngredientQuantity5: number=0;
+  myNutriscore5: string;
+
+
   myName: string;
 
   objRecipe: Recipe;
@@ -48,6 +61,33 @@ export class FormPage implements OnInit {
 
   
   public productData2: DataProduct = {
+    codeBar: 1,
+    name: '',
+    image: '',
+    nutriscore: '',
+    nutriscoreNote: -1,
+    allergen: ''
+  };
+
+  public productData3: DataProduct = {
+    codeBar: 1,
+    name: '',
+    image: '',
+    nutriscore: '',
+    nutriscoreNote: -1,
+    allergen: ''
+  };
+
+  public productData4: DataProduct = {
+    codeBar: 1,
+    name: '',
+    image: '',
+    nutriscore: '',
+    nutriscoreNote: -1,
+    allergen: ''
+  };
+
+  public productData5: DataProduct = {
     codeBar: 1,
     name: '',
     image: '',
@@ -82,14 +122,35 @@ export class FormPage implements OnInit {
       ingredientName: this.productData.name,
       ingredientQuantity: this.myIngredientQuantity,
       nutriscore: this.productData.nutriscore,
+      nutriscoreNote: this.productData.nutriscoreNote,
 
       ingredientName2: this.productData2.name,
       ingredientQuantity2: this.myIngredientQuantity2,
       nutriscore2: this.productData2.nutriscore,
+      nutriscoreNote2: this.productData2.nutriscoreNote,
 
+
+      ingredientName3: this.productData3.name,
+      ingredientQuantity3: this.myIngredientQuantity3,
+      nutriscore3: this.productData3.nutriscore,
+      nutriscoreNote3: this.productData3.nutriscoreNote,
+
+
+      ingredientName4: this.productData4.name,
+      ingredientQuantity4: this.myIngredientQuantity4,
+      nutriscore4: this.productData4.nutriscore,
+      nutriscoreNote4: this.productData4.nutriscoreNote,
+
+      ingredientName5: this.productData5.name,
+      ingredientQuantity5: this.myIngredientQuantity5,
+      nutriscore5: this.productData5.nutriscore,
+      nutriscoreNote5: this.productData5.nutriscoreNote,
 
       detailRecipe: this.myRecipe,
       name: this.myName,
+
+      note: "10",
+
     });
     console.log('addRecipeToFirebase 2e : ', this.recipes);
   }
@@ -99,7 +160,10 @@ export class FormPage implements OnInit {
     this.codee= this.scannedData.productData;
   }
 
-  else {  this.codee= this.scannedData.productData2;}
+  else if (this.productData2.name == null) {  this.codee= this.scannedData.productData2;}
+  else if (this.productData3.name == null) {  this.codee= this.scannedData.productData3;}
+  else if (this.productData4.name == null) {  this.codee= this.scannedData.productData4;}
+  else if (this.productData5.name == null) {  this.codee= this.scannedData.productData5;}
   }
   
 
@@ -148,7 +212,7 @@ export class FormPage implements OnInit {
     }
 
     if (this.productData.name == ''){
-      console.log('mon productData est null')
+      console.log('mon productData 1 est null')
     this.productData = {
       codeBar: data.code,
       name: this.dataName,
@@ -157,8 +221,8 @@ export class FormPage implements OnInit {
       nutriscoreNote: data.product.nutriscore_score,
       allergen: data.product.allergens_from_user
     };}
-else {
-  console.log('mon productData nest pas null')
+else  if (this.productData2.name == ''){
+  console.log('mon productData 2 est null')
   this.productData2 = {
     codeBar: data.code,
     name: this.dataName,
@@ -166,7 +230,37 @@ else {
     nutriscore: data.product.nutrition_grade_fr,
     nutriscoreNote: data.product.nutriscore_score,
     allergen: data.product.allergens_from_user
-  };
+  }}
+  else if (this.productData3.name == ''){
+    console.log('mon productData 3 est null')
+    this.productData3 = {
+      codeBar: data.code,
+      name: this.dataName,
+      image: data.product.image_front_url,
+      nutriscore: data.product.nutrition_grade_fr,
+      nutriscoreNote: data.product.nutriscore_score,
+      allergen: data.product.allergens_from_user
+    }}
+    else if (this.productData4.name == ''){
+      console.log('mon productData 4 est null')
+      this.productData4 = {
+        codeBar: data.code,
+        name: this.dataName,
+        image: data.product.image_front_url,
+        nutriscore: data.product.nutrition_grade_fr,
+        nutriscoreNote: data.product.nutriscore_score,
+        allergen: data.product.allergens_from_user
+      }}
+      else  if (this.productData5.name == ''){
+        console.log('mon productData 5 est null')
+        this.productData5 = {
+          codeBar: data.code,
+          name: this.dataName,
+          image: data.product.image_front_url,
+          nutriscore: data.product.nutrition_grade_fr,
+          nutriscoreNote: data.product.nutriscore_score,
+          allergen: data.product.allergens_from_user
+        };
 }
 
     console.log('handleData -> this.productData', this.productData);

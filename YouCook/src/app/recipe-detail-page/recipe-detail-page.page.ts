@@ -21,11 +21,22 @@ this.route.params.subscribe(params=> {
      this.myObjRecipe = {  recipeDetail: params.detailRecipe,
       ingredientNutriscore:params.nutriscore,
       ingredientNutriscore2:params.nutriscore2,
+      ingredientNutriscore3:params.nutriscore3,
+      ingredientNutriscore4:params.nutriscore4,
+      ingredientNutriscore5:params.nutriscore5,
+
       ingredientName:params.ingredientName,
       ingredientName2:params.ingredientName2,
+      ingredientName3:params.ingredientName3,
+      ingredientName4:params.ingredientName4,
+      ingredientName5:params.ingredientName5,
       ingredientQuantity:params.ingredientQuantity,
       ingredientQuantity2:params.ingredientQuantity2,
-      name:  params.name}
+      ingredientQuantity3:params.ingredientQuantity3,
+      ingredientQuantity4:params.ingredientQuantity4,
+      ingredientQuantity5:params.ingredientQuantity5,
+      name:  params.name,
+     note: params.note}
     console.log(this.myObjRecipe)
   }
 
