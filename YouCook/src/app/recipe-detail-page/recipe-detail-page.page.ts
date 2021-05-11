@@ -24,7 +24,6 @@ this.route.params.subscribe(params=> {
       ingredientNutriscore3:params.nutriscore3,
       ingredientNutriscore4:params.nutriscore4,
       ingredientNutriscore5:params.nutriscore5,
-
       ingredientName:params.ingredientName,
       ingredientName2:params.ingredientName2,
       ingredientName3:params.ingredientName3,

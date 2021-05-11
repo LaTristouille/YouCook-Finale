@@ -17,13 +17,13 @@
    <h4>{{myObjRecipe.ingredientName}}</h4>
    <h5 >{{myObjRecipe.ingredientQuantity}} g</h5>
    <h4>{{myObjRecipe.ingredientName2}}</h4>
-   <h5  *ngIf="myObjRecipe.ingredientQuantity2" >{{myObjRecipe.ingredientQuantity2}} g</h5>
+   <h5  *ngIf="myObjRecipe.ingredientQuantity2 != 0" >{{myObjRecipe.ingredientQuantity2}} g</h5>
    <h4>{{myObjRecipe.ingredientName3}}</h4>
-   <h5  *ngIf="myObjRecipe.ingredientQuantity3">{{myObjRecipe.ingredientQuantity3}} g</h5>
+   <h5  *ngIf="myObjRecipe.ingredientQuantity3 !=0">{{myObjRecipe.ingredientQuantity3}} g</h5>
    <h4>{{myObjRecipe.ingredientName4}}</h4>
-   <h5  *ngIf="myObjRecipe.ingredientQuantity4">{{myObjRecipe.ingredientQuantity4}} g</h5>
+   <h5  *ngIf="myObjRecipe.ingredientQuantity4 != 0">{{myObjRecipe.ingredientQuantity4}} g</h5>
    <h4>{{myObjRecipe.ingredientName5}}</h4>
-   <h5  *ngIf="myObjRecipe.ingredientQuantity5">{{myObjRecipe.ingredientQuantity5}} g</h5>
+   <h5  *ngIf="myObjRecipe.ingredientQuantity5 !=0" >{{myObjRecipe.ingredientQuantity5}} g</h5>
    <p>{{myObjRecipe.recipeDetail}}</p>
 
   </div>

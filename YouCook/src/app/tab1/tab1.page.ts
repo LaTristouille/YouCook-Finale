@@ -71,7 +71,16 @@ this.myNutriscore ='';
           key: action.key,
           detailRecipe: action.payload.exportVal().detailRecipe, 
           ingredientName: action.payload.exportVal().ingredientName, 
+          ingredientName2: action.payload.exportVal().ingredientName2, 
+          ingredientName3: action.payload.exportVal().ingredientName3, 
+          ingredientName4: action.payload.exportVal().ingredientName4, 
+          ingredientName5: action.payload.exportVal().ingredientName5, 
+
           ingredientQuantity: action.payload.exportVal().ingredientQuantity, 
+          ingredientQuantity2: action.payload.exportVal().ingredientQuantity2, 
+          ingredientQuantity3: action.payload.exportVal().ingredientQuantity3, 
+          ingredientQuantity4: action.payload.exportVal().ingredientQuantity4, 
+          ingredientQuantity5: action.payload.exportVal().ingredientQuantity5, 
           name: action.payload.exportVal().name, 
           note: action.payload.exportVal().note, 
         })
@@ -87,6 +96,7 @@ this.myNutriscore ='';
 
     openRecipes(recipe : any)
   {
+    console.log('recipe: ',recipe)
     this.router.navigate(['/recipe-detail-page', recipe]);
   }
 
