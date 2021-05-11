@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ModalController} from '@ionic/angular';
+import {ModalController, NavController, NavParams} from '@ionic/angular';
 import { Recipe } from '../interfaces/recipe';
 import { ConditionalExpr } from '@angular/compiler';
 import { AngularFireDatabase } from '@angular/fire/database';
@@ -7,7 +7,7 @@ import { DataProduct } from '../interfaces/data-product';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {BarcodeScanner, BarcodeScannerOptions} from '@ionic-native/barcode-scanner/ngx';
 import {LoadJsonService} from '../services/load-json.service';
-import {FormArray, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -112,7 +112,19 @@ export class FormPage implements OnInit {
     private router: Router,
     public barcodeCtrl: BarcodeScanner,
     private route: ActivatedRoute,
-    private loadJson: LoadJsonService) { }
+    private loadJson: LoadJsonService,
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private _FB: FormBuilder) {
+
+    this.form = this._FB.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      recipe: this._FB.array([
+        this.initTechnologyFields()
+      ])
+    });
+  }
 
   ngOnInit() {
   }
