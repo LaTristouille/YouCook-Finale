@@ -37,7 +37,6 @@ export class FormPage implements OnInit {
   myIngredientQuantity5: number=0;
   myNutriscore5: string;
 
-
   myName: string;
 
   objRecipe: Recipe;
@@ -58,7 +57,6 @@ export class FormPage implements OnInit {
     nutriscoreNote: -1,
     allergen: ''
   };
-
   
   public productData2: DataProduct = {
     codeBar: 1,
@@ -112,12 +110,25 @@ export class FormPage implements OnInit {
   CloseModal(){
     this.modalController.dismiss();
   }
+  noteRecette: any;
 
   addRecipeToFirebase(){
 
     console.log('addRecipeToFirebase -> this.productData', this.productData, this.productData2);
 
-    console.log('addRecipeToFirebase 1er : ', this.recipes);
+this.noteRecette = ((this.productData.nutriscoreNote*this.myIngredientQuantity)/100)
++((this.productData2.nutriscoreNote*this.myIngredientQuantity2)/100)
++((this.productData3.nutriscoreNote*this.myIngredientQuantity3)/100)
++((this.productData4.nutriscoreNote*this.myIngredientQuantity4)/100)
++((this.productData5.nutriscoreNote*this.myIngredientQuantity5)/100);
+
+if (this.noteRecette < -2  ){ this.noteRecette= 'A'} 
+else if (this.noteRecette < 3 ) { this.noteRecette= 'B'} 
+else if (this.noteRecette < 11 ){this.noteRecette='C'} 
+else if (this.noteRecette < 16) {this.noteRecette='D'}
+else {this.noteRecette='E'}
+
+    console.log('Note de la recette', this.noteRecette)
     this.afDB.list('Recipes/').push({
       ingredientName: this.productData.name,
       ingredientQuantity: this.myIngredientQuantity,
@@ -129,12 +140,10 @@ export class FormPage implements OnInit {
       nutriscore2: this.productData2.nutriscore,
       nutriscoreNote2: this.productData2.nutriscoreNote,
 
-
       ingredientName3: this.productData3.name,
       ingredientQuantity3: this.myIngredientQuantity3,
       nutriscore3: this.productData3.nutriscore,
       nutriscoreNote3: this.productData3.nutriscoreNote,
-
 
       ingredientName4: this.productData4.name,
       ingredientQuantity4: this.myIngredientQuantity4,
@@ -148,10 +157,10 @@ export class FormPage implements OnInit {
 
       detailRecipe: this.myRecipe,
       name: this.myName,
-
-      note: "10",
-
+      note: this.noteRecette
     });
+
+
     console.log('addRecipeToFirebase 2e : ', this.recipes);
   }
 
@@ -159,13 +168,11 @@ export class FormPage implements OnInit {
     if (this.productData.name == null){
     this.codee= this.scannedData.productData;
   }
-
   else if (this.productData2.name == null) {  this.codee= this.scannedData.productData2;}
   else if (this.productData3.name == null) {  this.codee= this.scannedData.productData3;}
   else if (this.productData4.name == null) {  this.codee= this.scannedData.productData4;}
   else if (this.productData5.name == null) {  this.codee= this.scannedData.productData5;}
   }
-  
 
   goToBarcodeScan() {
 

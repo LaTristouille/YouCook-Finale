@@ -19,6 +19,6 @@ export interface Recipe {
     ingredientNutriscore3: Ingredient['nutriscore'];
     ingredientNutriscore4: Ingredient['nutriscore'];
     ingredientNutriscore5: Ingredient['nutriscore'];
-    note: number;
+    note: any;
     name: string;
 }
