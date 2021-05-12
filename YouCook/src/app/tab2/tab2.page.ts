@@ -56,6 +56,7 @@ export class Tab2Page {
           this.codeBar = params.codeBar;
         }
         this.getProduct();
+        this.scanActive= true;
       });
 
     }).catch(err => {
@@ -74,13 +75,12 @@ export class Tab2Page {
     console.log(data);
     this.productData = {
       codeBar: data.code,
-      name: data.product.generic_name_it,
+      name: data.product.product_name,
       image: data.product.image_front_url,
       nutriscore: data.product.nutrition_grade_fr,
       nutriscoreNote: data.product.nutriscore_score,
       allergen: data.product.allergens_from_user
     };
-    //console.log(this.productData);
   }
 
 }

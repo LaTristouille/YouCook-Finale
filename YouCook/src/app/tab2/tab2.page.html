@@ -1,36 +1,65 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Scan
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card</title>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
+  <style>
+    :root {
+      --ion-safe-area-top: 20px;
+      --ion-safe-area-bottom: 22px;
+    }
+  </style>
+</head>
+<ion-app>
+  <ion-header [translucent]="true">
     <ion-toolbar>
-      <ion-title size="large">Scan</ion-title>
+      <ion-title>
+        Scan
+      </ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-card class="welcome-card">
-    <img src="/assets/scan.jpeg" alt="" />
-    <ion-button expand='block' margin (click)="goToBarcodeScan()">Scanner un codebare ou un QRcode ici</ion-button>
-  </ion-card>
+  <ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Scan</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-  <ion-card>
+    <ion-card class="welcome-card">
+      <ion-button expand='block' margin (click)="goToBarcodeScan()">Scanner un codebare ou un QRcode ici</ion-button>
+    </ion-card>
 
-    <ion-card-header>
-      <ion-card-title>{{ productData.name }}</ion-card-title>
-      <ion-card-subtitle>{{productData.codeBar}}</ion-card-subtitle>
-    </ion-card-header>
-    <ion-img [src]="productData.image" *ngIf="productData.image != 'N/A'"></ion-img>
+    <ion-card *ngIf="scanActive">
+      <ion-img [src]="productData.image" *ngIf="productData.image != 'N/A'"></ion-img>
 
-    <ion-card-content>
-      <ion-label *ngIf="productData.nutriscore">Nutriscore : {{productData.nutriscore}}</ion-label><br>
-      <ion-label *ngIf="productData.allergen">Allergènes : {{productData.allergen}}</ion-label><br>
-    </ion-card-content>
-  </ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ productData.name }}</ion-card-title>
+      </ion-card-header>
 
-<!--  <app-explore-container name="Tab 2 page"></app-explore-container>-->
-</ion-content>
+      <ion-card-content>
+
+        <ion-label>
+          <img class="nutriscoreImage" *ngIf="productData.nutriscore == 'a'" src="../../assets/images/nutriscore-a.png"
+               alt="Nutriscore A"/>
+          <img class="nutriscoreImage" *ngIf="productData.nutriscore == 'b'" src="../../assets/images/nutriscore-b.png"
+               alt="Nutriscore B"/>
+          <img class="nutriscoreImage" *ngIf="productData.nutriscore == 'c'" src="../../assets/images/nutriscore-c.png"
+               alt="Nutriscore C"/>
+          <img class="nutriscoreImage" *ngIf="productData.nutriscore == 'd'" src="../../assets/images/nutriscore-d.png"
+               alt="Nutriscore D"/>
+          <img class="nutriscoreImage" *ngIf="productData.nutriscore == 'e'" src="../../assets/images/nutriscore-e.png"
+               alt="Nutriscore E"/>
+
+        </ion-label>
+        <br>
+        <ion-label  *ngIf="productData.allergen">Allergènes : {{productData.allergen}}</ion-label>
+        <br>
+      </ion-card-content>
+    </ion-card>
+
+    <!--  <app-explore-container name="Tab 2 page"></app-explore-container>-->
+  </ion-content>
+</ion-app>
